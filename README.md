@@ -1,3 +1,3 @@
 # microwave
-WIP - Discord bot for a personal server called the kitchen.
+WIP - Discord bot for a personal server called the Kitchen.
 
