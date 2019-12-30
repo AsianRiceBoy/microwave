@@ -10,7 +10,7 @@ reddit = praw.Reddit(client_id = os.getenv("CLIENT_ID"), client_secret = os.gete
 def getTopPosts(sourceSubreddit = "all", timescale = "day", amount = 10):
 	"""Return a list of the specified amount of top posts over a given timescale from the subreddit."""
 	#TODO implement error handling for invalid subreddits
-	#TODO error handling for unspecified amount (hour,day,week,month,year,all = valid)
+	#TODO error handling for unspecified timescales (hour,day,week,month,year,all = valid)
 	#TODO set upper limit for amount of posts retrieved
 	source = reddit.subreddit(sourceSubreddit)
 	topPosts = []
