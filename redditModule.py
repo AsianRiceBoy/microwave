@@ -9,14 +9,12 @@ reddit = praw.Reddit(client_id = os.getenv("CLIENT_ID"), client_secret = os.gete
 
 def getTopPosts(sourceSubreddit = "all", timescale = "day", amount = 10):
 	"""Return a list of the specified amount of top posts over a given timescale from the subreddit."""
-	#TODO error handling for unspecified timescales (hour,day,week,month,year,all = valid)
-	#TODO set upper limit for amount of posts retrieved
-	source = None
-	if subredditExists(sourceSubreddit):
-		source = reddit.subreddit(sourceSubreddit)
-	else:
-		return ("Subreddit invalid")
+	if not(subredditExists(sourceSubreddit)): return "Subreddit invalid" 
+	if not(timescaleValid(timescale)): return "Timescale invalid" 
+	if (type(amount) != int or amount > 50 or amount < 0): return "Amount invalid (limit 50)" 
 
+	source = reddit.subreddit(sourceSubreddit)
+	
 	topPosts = []
 	for post in source.top(timescale, limit = amount):
 		topPosts.append(post.permalink)
@@ -33,7 +31,14 @@ def subredditExists(sourceSubreddit):
 
 	return exists
 
-
-
-
+def timescaleValid(timescale):
+	"""checks that a timescale is in the list of valid entries"""
+	validTimescales = ["hour", "day", "week", "month", "year", "all"]
+	valid = True
+	if not(timescale in validTimescales):
+		valid = False
+	else:
+		pass
+	
+	return valid
 
